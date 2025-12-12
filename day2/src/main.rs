@@ -11,7 +11,10 @@ fn main() {
 fn part1(input_vec: &Vec<&str>) -> i64 {
     let mut answer = 0;
     for input in input_vec {
-        let ranges = input.splitn(2, "-").map(|i| i.parse::<i64>().unwrap()).collect::<Vec<i64>>();
+        let ranges = input
+            .splitn(2, "-")
+            .map(|i| i.parse::<i64>().unwrap())
+            .collect::<Vec<i64>>();
         for num in ranges[0]..=ranges[1] {
             let digits = num.ilog10() + 1;
             if digits % 2 == 0 {
@@ -48,7 +51,10 @@ fn get_divisors(n: u32) -> Vec<u32> {
 fn part2(input_vec: &Vec<&str>) -> i64 {
     let mut answer = 0;
     for input in input_vec {
-        let ranges = input.splitn(2, "-").map(|x| x.parse::<i64>().expect(&format!("wtf is a {x}"))).collect::<Vec<i64>>();
+        let ranges = input
+            .splitn(2, "-")
+            .map(|x| x.parse::<i64>().expect(&format!("wtf is a {x}")))
+            .collect::<Vec<i64>>();
         'outer: for i in ranges[0]..=ranges[1] {
             let digits = i.ilog10() + 1;
             let mut chunk_sizes = get_divisors(digits);

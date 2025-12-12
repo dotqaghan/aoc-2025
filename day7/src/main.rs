@@ -11,7 +11,9 @@ fn main() {
 
 fn part2(mut input: Vec<Vec<char>>, cache: Arc<DashMap<Vec<String>, i64>>) -> i64 {
     let key: Vec<String> = input.iter().map(|row| row.iter().collect()).collect();
-    if let Some(count) = cache.get(&key) { return *count; }
+    if let Some(count) = cache.get(&key) {
+        return *count;
+    }
 
     let mut count = 0;
 
@@ -45,19 +47,19 @@ fn part2(mut input: Vec<Vec<char>>, cache: Arc<DashMap<Vec<String>, i64>>) -> i6
 fn part1(mut input: Vec<Vec<char>>) -> i64 {
     let length = input.len();
     let mut count = 0;
-    for i in 0..length-1 {
+    for i in 0..length - 1 {
         for j in 0..input[i].len() {
             if input[i][j] == 'S' {
-                input[i+1][j] = '|';
+                input[i + 1][j] = '|';
             }
             if input[i][j] == '|' {
-                if input[i+1][j] == '^' {
-                    input[i+1][j+1] = '|';
-                    input[i+1][j-1] = '|';
+                if input[i + 1][j] == '^' {
+                    input[i + 1][j + 1] = '|';
+                    input[i + 1][j - 1] = '|';
                     count += 1;
                 }
-                if input[i+1][j] == '.' {
-                    input[i+1][j] = '|';
+                if input[i + 1][j] == '.' {
+                    input[i + 1][j] = '|';
                 }
             }
         }

@@ -14,7 +14,10 @@ fn part1(ranges: &str, ingredients: &str) -> u64 {
         let id = ingredient.parse::<u64>().unwrap();
         for range in ranges.lines() {
             let (first, second) = range.split_once('-').unwrap();
-            let (lower, upper) = (first.parse::<u64>().unwrap(), second.parse::<u64>().unwrap());
+            let (lower, upper) = (
+                first.parse::<u64>().unwrap(),
+                second.parse::<u64>().unwrap(),
+            );
             if lower <= id && id <= upper {
                 count += 1;
                 break;
@@ -52,5 +55,8 @@ fn part2(ranges: &str, ingredients: &str) -> u64 {
     }
     merged.push(search);
 
-    merged.iter().map(|range| range.end - range.start).sum::<u64>()
+    merged
+        .iter()
+        .map(|range| range.end - range.start)
+        .sum::<u64>()
 }

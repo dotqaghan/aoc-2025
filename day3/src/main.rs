@@ -13,14 +13,14 @@ fn part1(input: &str) -> i64 {
         let digits = line.as_bytes();
 
         let mut l_index = 0;
-        for i in 0..digits.len()-1 {
+        for i in 0..digits.len() - 1 {
             if digits[l_index] < digits[i] {
                 l_index = i;
             }
         }
 
         let mut r_index = l_index + 1;
-        for i in l_index +1..digits.len() {
+        for i in l_index + 1..digits.len() {
             if digits[r_index] < digits[i] {
                 r_index = i;
             }
@@ -39,7 +39,9 @@ fn part2(input: &str) -> i64 {
         let mut digits = line.as_bytes().to_vec();
         let mut l = 0;
         while digits.len() > 12 {
-            if l + 2 > digits.len() { break }
+            if l + 2 > digits.len() {
+                break;
+            }
             if digits[l] < digits[l + 1] {
                 digits.remove(l);
                 l = 0;

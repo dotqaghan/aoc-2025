@@ -5,7 +5,7 @@ use std::fs;
 
 struct Machine {
     target_indicators: i32,
-    buttons: Vec<Vec<usize>>,
+    buttons: Vec<Vec<i32>>,
     joltage_requirements: Vec<i32>,
 }
 
@@ -26,7 +26,7 @@ impl Display for Machine {
 }
 
 fn main() {
-    let file = fs::read_to_string("inputs//day10.txt").unwrap();
+    let file = fs::read_to_string("inputs/day10.txt").unwrap();
     let machines = parse_file(file);
 
     println!("result 1: {:?}", part1(&machines));
@@ -58,7 +58,7 @@ fn parse_file(file: String) -> Vec<Machine> {
             .map(|&x| {
                 (&x[1..x.len() - 1])
                     .split(',')
-                    .map(|num| num.parse::<usize>().unwrap())
+                    .map(|num| num.parse::<i32>().unwrap())
                     .collect::<Vec<_>>()
             })
             .collect::<Vec<_>>();
@@ -118,12 +118,12 @@ fn part2(machines: &Vec<Machine>) -> i32 {
                 .buttons
                 .iter()
                 .enumerate()
-                .filter(|(_, indices)| indices.contains(&i))
-                .map(|(button, _)| vars[button])
+                .filter(|(_, buttons)| buttons.contains(&(i as i32)))
+                .map(|(j, _)| vars[j])
                 .collect();
 
-            let constraint_sum: Expression = relevant_vars.iter().sum();
-            model.add_constraint(constraint_sum.eq(target_value));
+            let expression: Expression = relevant_vars.iter().sum();
+            model.add_constraint(expression.eq(target_value));
         }
 
         let solution = model.solve().unwrap();

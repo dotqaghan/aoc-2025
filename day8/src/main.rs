@@ -24,7 +24,8 @@ fn parse_file(file: &str) -> (Vec<IVec3>, Vec<((usize, usize), f64)>, Forest) {
 
     let forest = Forest::with_size(positions.len());
 
-    let mut distances: Vec<((usize, usize), f64)> = Vec::with_capacity(positions.len() * (positions.len() - 1));
+    let mut distances: Vec<((usize, usize), f64)> =
+        Vec::with_capacity(positions.len() * (positions.len() - 1));
     for a in 0..positions.len() {
         for b in a + 1..positions.len() {
             distances.push(((a, b), distance_between(&positions[a], &positions[b])))
@@ -119,8 +120,8 @@ fn part2(file: &str) -> i64 {
 
 #[cfg(test)]
 mod tests {
-    use std::fs;
     use crate::{part1, part2};
+    use std::fs;
 
     #[test]
     fn part1_example() {

@@ -1,7 +1,6 @@
 use std::ops::Sub;
 
-#[derive(Debug, Clone, Copy)]
-#[derive(PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct IVec2 {
     pub x: i64,
     pub y: i64,
@@ -17,7 +16,10 @@ impl IVec2 {
     }
 
     pub fn cross(lhs: &IVec2, rhs: &IVec2) -> IVec2 {
-        IVec2  { x: lhs.x * rhs.y - lhs.y * rhs.x, y: 0 }
+        IVec2 {
+            x: lhs.x * rhs.y - lhs.y * rhs.x,
+            y: 0,
+        }
     }
 
     pub fn distance(lhs: &IVec2, rhs: &IVec2) -> f64 {
@@ -49,7 +51,10 @@ impl Sub for IVec2 {
     type Output = IVec2;
 
     fn sub(self, rhs: Self) -> Self::Output {
-        IVec2 {x: self.x - rhs.x, y: self.y - rhs.y }
+        IVec2 {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y,
+        }
     }
 }
 
@@ -62,7 +67,6 @@ impl IRect {
         //
         // cross.magnitude() as i64
         (i64::abs(self.a.x - self.c.x) + 1) * (i64::abs(self.a.y - self.c.y) + 1)
-
     }
     pub fn contains(&self, point: &IVec2) -> bool {
         let ab = self.b - self.a;
@@ -70,7 +74,10 @@ impl IRect {
         let bc = self.c - self.b;
         let bm = *point - self.b;
 
-        (0 <= IVec2::dot(&ab, &am)) && (IVec2::dot(&ab, &am) < IVec2::dot(&ab, &ab)) && (0 < IVec2::dot(&bc, &bm)) && (IVec2::dot(&bc, &bm) < IVec2::dot(&bc, &bc))
+        (0 <= IVec2::dot(&ab, &am))
+            && (IVec2::dot(&ab, &am) < IVec2::dot(&ab, &ab))
+            && (0 < IVec2::dot(&bc, &bm))
+            && (IVec2::dot(&bc, &bm) < IVec2::dot(&bc, &bc))
     }
 }
 
@@ -101,10 +108,10 @@ mod tests {
     #[test]
     fn test_contains() {
         let rectangle = IRect {
-            a: IVec2 {x: 50, y: 0},
-            b: IVec2 {x: 0, y: 20},
-            c: IVec2 {x: 10, y: 50},
-            d: IVec2 {x: 60, y: 30},
+            a: IVec2 { x: 50, y: 0 },
+            b: IVec2 { x: 0, y: 20 },
+            c: IVec2 { x: 10, y: 50 },
+            d: IVec2 { x: 60, y: 30 },
         };
         let mut count = 0;
         for y in (0..50).rev() {
